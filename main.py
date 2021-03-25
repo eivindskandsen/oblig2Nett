@@ -10,16 +10,27 @@ chat_rooms=[]
 
 class actions(Recource):
 
-    def get(self, ):
+    def get_all_rooms(self, ):
+    def get_one_room(self):
+    def add_one_room(self,):
 
-    def post(self, ):
 
-    def delete(self,):
+    def get_all_room_users(self):
+    def add_user_room(self):
 
-    def put(self, ):
+
+    def get_all_messages(self):
+
+
+    def add_message_room(self):
+    def get_all_messages_room(self):
+
+
+
 
 class chatrooms:
     conversation_list=[]
+
 
 
 
