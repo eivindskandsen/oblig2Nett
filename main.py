@@ -11,19 +11,27 @@ chat_rooms=[]
 class actions(Recource):
 
     def get_all_rooms(self, ):
+        return
     def get_one_room(self):
+        return
     def add_one_room(self,):
+        return
 
 
     def get_all_room_users(self):
+        return
     def add_user_room(self):
+        return
 
 
     def get_all_messages(self):
+        return
 
 
     def add_message_room(self):
+        return
     def get_all_messages_room(self):
+        return
 
 
 
