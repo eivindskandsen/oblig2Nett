@@ -5,7 +5,8 @@ app = Flask(__name__)
 api = Api(app)
 
 chat_rooms = []
-
+#parser = reqparse.RequestParser()
+#parser.add_argument("et eller annet", type=int/str, help="er eller annet required...", required=True)
 
 
 class actions(Recource):
@@ -18,6 +19,9 @@ class actions(Recource):
         return chat_rooms[id]
 
     def add_one_room(self, id):
+        abort_if_exists(id)
+        #args = "parser".parse_args()
+        #chat_rooms[id] = args
         return
 
 
