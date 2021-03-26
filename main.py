@@ -1,10 +1,10 @@
 from flask import Flask
 from flask_restful import Api, Recource, reqparse, abort
 import flask_restful
-app=Flask(__name__)
-api=Api(app)
+app = Flask(__name__)
+api = Api(app)
 
-chat_rooms=[]
+chat_rooms = []
 
 
 
@@ -12,24 +12,31 @@ class actions(Recource):
 
     def get_all_rooms(self, ):
         return
-    def get_one_room(self):
-        return
-    def add_one_room(self,):
+
+    def get_one_room(self, id):
+        abort_if_not_found(id)
+        return chat_rooms[id]
+
+    def add_one_room(self, id):
         return
 
 
     def get_all_room_users(self):
         return
+
     def add_user_room(self):
         return
+
 
 
     def get_all_messages(self):
         return
 
 
+
     def add_message_room(self):
         return
+
     def get_all_messages_room(self):
         return
 
@@ -44,12 +51,12 @@ class chatrooms:
 
 
 
-def abort_if_not_found(id, chatroom):
-    if id not in chatroom:
+def abort_if_not_found(id):
+    if id not in chat_rooms:
         abort(404, message="Not found")
 
-def abort_if_exists(id, chatroom):
-    if id in chatroom:
+def abort_if_exists(id):
+    if id in chat_rooms:
         abort(404, message="Already exists")
 
 
