@@ -10,8 +10,8 @@ chat_room={}
 
 chat_room_add = reqparse.RequestParser()
 chat_room_add.add_argument("room_id", type=int, help="id is required..", required=True)
-chat_room_add.add_argument("chat",type=[], help="chat array is required", required=True)
-chat_room_add.add_argument("members",type=[],help="member array is required", required=True)
+chat_room_add.add_argument("chat",type=str, help="chat array is required", required=True)
+chat_room_add.add_argument("members",type=str,help="member array is required", required=True)
 
 
 
@@ -26,8 +26,8 @@ class Rooms(Resource):
 
     def post(self, a_room):
         args = chat_room_add.parse_args()
-        chat_rooms[a_room]=args
-        return chat_rooms[a_room]
+        chat_room[a_room]=args
+        return chat_room[a_room], 201
 
 class Room(Resource):
 
@@ -45,7 +45,7 @@ class Messages(Resource):
     def get_all_messages_room(self):
         return
 
-api.add_resource(Rooms, "/api/rooms")
+api.add_resource(Rooms, "/api/rooms/<int:a_room>")
 
 
 
