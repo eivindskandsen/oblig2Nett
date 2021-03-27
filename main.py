@@ -6,6 +6,7 @@ api=Api(app)
 
 chat_rooms=[]
 chat_room={}
+#chat =[]
 
 chat_room_add = reqparse.RequestParser()
 chat_room_add.add_argument("room_id", type=int, help="id is required..", required=True)
@@ -23,9 +24,10 @@ class Rooms(Resource):
     def get_one_room(self, chat_room_id):
         return chat_rooms[chat_room_id-1]
 
-    def add_one_room(self):
+    def post(self, a_room):
         args = chat_room_add.parse_args()
-        chat_room.append(args)
+        chat_rooms[a_room]=args
+        return chat_rooms[a_room]
 
 class Room(Resource):
 
