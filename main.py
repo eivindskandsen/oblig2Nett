@@ -90,8 +90,13 @@ def abort_if_exists(id, para):
         abort(403, message="Already exists")
 
 
+<<<<<<< HEAD
+api.add_resource(User, "/api/user/<int:user_id>")
+api.add_resource(Users, "/api/users")
+=======
 api.add_resource(User, "api/user/<int:user_id>")
 api.add_resource(Users, "api/users")
+>>>>>>> master
 api.add_resource(Rooms, "/api/rooms/<int:a_room>")
 
 # Press the green button in the gutter to run the script.
