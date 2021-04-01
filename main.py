@@ -9,6 +9,7 @@ chat_rooms = []
 chat_room = {}
 # chat =[]
 users = {}
+user_nr = 0
 
 chat_room_add = reqparse.RequestParser()
 chat_room_add.add_argument("room_id", type=int, help="id is required..", required=True)
@@ -16,7 +17,7 @@ chat_room_add.add_argument("chat", type=str, help="chat array is required", requ
 chat_room_add.add_argument("members", type=str, help="member array is required", required=True)
 
 user_post = reqparse.RequestParser()
-user_post.add_argument("Name", type=str, help="Name is required!", required=True)
+user_post.add_argument("name", type=str, help="Name is required!", required=True)
 
 
 class Rooms(Resource):
@@ -55,25 +56,31 @@ class Messages(Resource):
 
 
 class Users(Resource):
+    def get(self):
+        printer = []
+        for user in users:
+            printer.append(users[user])
+        return printer
 
-    def get_all_users(self):
-        return
-
-    def post_user(self, user_id):
-        abort_if_exists(user_id, users)
+    def post(self):
+        user_id = len(users)
+        if user_id in users:
+            user_id += 1
         args = user_post.parse_args()
         users[user_id] = args
-        return users[user_id], 201
+        return user_id, 201
 
 
 class User(Resource):
 
-    def get_user(self, user_id):
+    def get(self, user_id):
         abort_if_not_found(user_id, users)
         return users[user_id]
 
-    def delete_user(self, user_id):
+    def delete(self, user_id):
         abort_if_not_found(user_id, users)
+        del users[user_id]
+        return "", 202
 
 
 class chatrooms:
@@ -90,10 +97,9 @@ def abort_if_exists(id, para):
         abort(403, message="Already exists")
 
 
-
+api.add_resource(Rooms, "/api/rooms/<int:a_room>")
 api.add_resource(User, "/api/user/<int:user_id>")
 api.add_resource(Users, "/api/users")
-api.add_resource(Rooms, "/api/rooms/<int:a_room>")
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
