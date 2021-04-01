@@ -18,6 +18,7 @@ chat_room_add.add_argument("members", type=str, help="member array is required",
 
 user_post = reqparse.RequestParser()
 user_post.add_argument("name", type=str, help="Name is required!", required=True)
+#user_post.add_argument("ip", type=int, help="Ip is required!", required=True)
 
 
 class Rooms(Resource):
