@@ -10,7 +10,7 @@ chat_room = {}
 chat =[]
 users = {}
 user_nr = 0
-
+#test2
 chat_room_add = reqparse.RequestParser()
 chat_room_add.add_argument("room_id", type=int, help="id is required..", required=True)
 chat_room_add.add_argument("chat", type=str, help="chat array is required", required=True)
@@ -35,7 +35,7 @@ class Rooms(Resource):
     def post(self, a_room):
         abort_if_exists(a_room, chat_rooms)
         abort_if_exists(a_room, chat_rooms)
-        
+
         args = chat_room_add.parse_args()
         chat_room[a_room] = args
         chat_rooms[a_room]=args
