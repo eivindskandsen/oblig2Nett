@@ -1,10 +1,10 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse, abort
-import flask_restful
+
 
 app = Flask(__name__)
 api = Api(app)
-
+#TEST AV MEG
 chat_rooms = []
 chat_room = {}
 chat =[]
@@ -54,16 +54,18 @@ class Room(Resource):
 class Messages(Resource):
 
     def get(self, a_room):
-
         return chat
 
     def post(self, a_room):
-        args=messages_add.parse_args()
+        args = messages_add.parse_args()
         chat.append(args)
         print(chat)
         return chat[len(chat)-1]
 
 
+class Message(Resource):
+    def get(self, a_room, user_id):
+        return
 
 
 class Users(Resource):
@@ -112,6 +114,7 @@ api.add_resource(Rooms, "/api/rooms/<int:a_room>")
 api.add_resource(User, "/api/user/<int:user_id>")
 api.add_resource(Users, "/api/users")
 api.add_resource(Messages, "/api/rooms/<int:a_room>/messages")
+api.add_resource(Message, "/api/rooms/<int:a_room>/<int:user_id>/messages")
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
