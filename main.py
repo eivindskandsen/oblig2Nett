@@ -7,8 +7,9 @@ api = Api(app)
 
 chat_rooms = []
 chat_room = {}
-# chat =[]
+chat =[]
 users = {}
+user_nr = 0
 
 chat_room_add = reqparse.RequestParser()
 chat_room_add.add_argument("room_id", type=int, help="id is required..", required=True)
@@ -17,6 +18,10 @@ chat_room_add.add_argument("members", type=str, help="member array is required",
 
 user_post = reqparse.RequestParser()
 user_post.add_argument("name", type=str, help="Name is required!", required=True)
+#user_post.add_argument("ip", type=int, help="Ip is required!", required=True)
+
+messages_add= reqparse.RequestParser()
+messages_add.add_argument("chat",type=str, help="chat is required..", required=True)
 
 
 class Rooms(Resource):
@@ -44,21 +49,20 @@ class Room(Resource):
 
 class Messages(Resource):
 
-    def get(self):
-        return
+    def get(self, a_room):
+
+        return chat
+
+    def post(self, a_room):
+        args=messages_add.parse_args()
+        chat.append(args)
+        print(chat)
+        return chat[a_room]
 
 
-class Message(Resource):
-
-    def get(self):
-        return
-
-    def post(self):
-        return
 
 
 class Users(Resource):
-
     def get(self):
         printer = []
         for user in users:
@@ -100,11 +104,10 @@ def abort_if_exists(id, para):
         abort(403, message="Already exists")
 
 
+api.add_resource(Rooms, "/api/rooms/<int:a_room>")
 api.add_resource(User, "/api/user/<int:user_id>")
 api.add_resource(Users, "/api/users")
-api.add_resource(Rooms, "/api/rooms/<int:a_room>")
-api.add_resource(Messages, "/api/room/<int:room_id>/messages")
-api.add_resource(Message, "/api/room/<int:room_id>/<int:user_id>/messages")
+api.add_resource(Messages, "/api/rooms/<int:a_room>/messages")
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

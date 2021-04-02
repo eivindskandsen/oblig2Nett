@@ -15,5 +15,8 @@ print(response.json())
 response = requests.get('http://127.0.0.1:5000/' + "/api/users")
 print(response.json())
 
-response = requests.get('http://127.0.0.1:5000/' + "api/user/2")
+response = requests.get('http://127.0.0.1:5000/' + "/api/user/2")
+print(response.json())
+
+response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/messages", {"chat": "Hallo"})
 print(response.json())
