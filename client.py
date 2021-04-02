@@ -1,7 +1,8 @@
 import requests
-members = []
 response = requests.post('http://127.0.0.1:5000/' + "/api/users", {"name": "Martin"})
 print(response.json())
+print(response)
+
 response = requests.post('http://127.0.0.1:5000/' + "/api/users", {"name": "Mart"})
 print(response.json())
 
