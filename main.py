@@ -33,6 +33,9 @@ class Rooms(Resource):
      #   return chat_rooms[chat_room_id - 1]
 
     def post(self, a_room):
+        abort_if_exists(a_room, chat_rooms)
+        abort_if_exists(a_room, chat_rooms)
+        
         args = chat_room_add.parse_args()
         chat_room[a_room] = args
         chat_rooms[a_room]=args
@@ -58,7 +61,7 @@ class Messages(Resource):
         args=messages_add.parse_args()
         chat.append(args)
         print(chat)
-        return chat[a_room]
+        return chat[len(chat)-1]
 
 
 
