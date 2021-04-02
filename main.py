@@ -26,22 +26,23 @@ messages_add.add_argument("chat",type=str, help="chat is required..", required=T
 
 class Rooms(Resource):
 
-    def get_all_rooms(self):
+    def get(self):
         return chat_rooms
 
-    def get_one_room(self, chat_room_id):
-        return chat_rooms[chat_room_id - 1]
+    #def get_one_room(self, chat_room_id):
+     #   return chat_rooms[chat_room_id - 1]
 
     def post(self, a_room):
         args = chat_room_add.parse_args()
         chat_room[a_room] = args
+        chat_rooms[a_room]=args
         return chat_room[a_room], 201
 
 
 class Room(Resource):
 
-    def get_all_room_users(self):
-        return
+    def get(self,a_room):
+        return chat_room[a_room]
 
     def add_user_room(self):
         return
