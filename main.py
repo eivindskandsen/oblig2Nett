@@ -1,16 +1,15 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse, abort
 
-
 app = Flask(__name__)
 api = Api(app)
-#TEST AV MEG
+# TEST AV MEG
 chat_rooms = []
 chat_room = {}
-chat =[]
+chat = []
 users = {}
 user_nr = 0
-#test2
+# test2
 chat_room_add = reqparse.RequestParser()
 chat_room_add.add_argument("room_id", type=int, help="id is required..", required=True)
 chat_room_add.add_argument("chat", type=str, help="chat array is required", required=True)
@@ -18,10 +17,10 @@ chat_room_add.add_argument("members", type=str, help="member array is required",
 
 user_post = reqparse.RequestParser()
 user_post.add_argument("name", type=str, help="Name is required!", required=True)
-#user_post.add_argument("ip", type=int, help="Ip is required!", required=True)
+# user_post.add_argument("ip", type=int, help="Ip is required!", required=True)
 
-messages_add= reqparse.RequestParser()
-messages_add.add_argument("chat",type=str, help="chat is required..", required=True)
+messages_add = reqparse.RequestParser()
+messages_add.add_argument("chat", type=str, help="chat is required..", required=True)
 
 
 class Rooms(Resource):
@@ -29,8 +28,8 @@ class Rooms(Resource):
     def get(self):
         return chat_rooms
 
-    #def get_one_room(self, chat_room_id):
-     #   return chat_rooms[chat_room_id - 1]
+    # def get_one_room(self, chat_room_id):
+    #   return chat_rooms[chat_room_id - 1]
 
     def post(self, a_room):
         abort_if_exists(a_room, chat_rooms)
@@ -38,13 +37,13 @@ class Rooms(Resource):
 
         args = chat_room_add.parse_args()
         chat_room[a_room] = args
-        chat_rooms[a_room]=args
+        chat_rooms[a_room] = args
         return chat_room[a_room], 201
 
 
 class Room(Resource):
 
-    def get(self,a_room):
+    def get(self, a_room):
         return chat_room[a_room]
 
     def add_user_room(self):
@@ -53,19 +52,26 @@ class Room(Resource):
 
 class Messages(Resource):
 
-    def get(self, a_room):
+    def get(self, a_room, user_id):
         return chat
-
-    def post(self, a_room):
-        args = messages_add.parse_args()
-        chat.append(args)
-        print(chat)
-        return chat[len(chat)-1]
 
 
 class Message(Resource):
+
     def get(self, a_room, user_id):
+        abort_if_not_found(user_id, users)
+        abort_if_not_found(a_room, chat_rooms)
+
         return
+
+    def post(self, a_room, user_id):
+        abort_if_not_found(user_id, users)
+        abort_if_not_found(a_room, chat_rooms)
+
+        args = messages_add.parse_args()
+        chat.append(args)
+        print(chat)
+        return chat[len(chat) - 1]
 
 
 class Users(Resource):
