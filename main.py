@@ -21,7 +21,8 @@ user_post.add_argument("name", type=str, help="Name is required!", required=True
 
 messages_add = reqparse.RequestParser()
 messages_add.add_argument("chat", type=str, help="chat is required..", required=True)
-
+messages_add.add_argument("user_id", type=int, help="user_id is required..", required=True)
+messages_add.add_argument("room", type=int, help="room is required..", required=True)
 
 class Rooms(Resource):
 
@@ -46,8 +47,7 @@ class Room(Resource):
     def get(self, a_room):
         return chat_room[a_room]
 
-    def add_user_room(self):
-        return
+
 
 
 class Messages(Resource):
