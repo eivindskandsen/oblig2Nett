@@ -53,7 +53,11 @@ class Room(Resource):
 class Messages(Resource):
 
     def get(self, a_room, user_id):
-        return chat
+        for x in chat:
+            if x.get("user_id")== user_id:
+                if x.get("room") == a_room:
+                    return x
+
 
 
 class Message(Resource):
@@ -102,8 +106,7 @@ class User(Resource):
         return "", 202
 
 
-class chatrooms:
-    conversation_list = []
+
 
 
 def abort_if_not_found(id, para):
@@ -119,7 +122,7 @@ def abort_if_exists(id, para):
 api.add_resource(Rooms, "/api/rooms/<int:a_room>")
 api.add_resource(User, "/api/user/<int:user_id>")
 api.add_resource(Users, "/api/users")
-api.add_resource(Messages, "/api/rooms/<int:a_room>/messages")
+api.add_resource(Messages, "/api/rooms/<int:a_room>/<int:user_id>/message")
 api.add_resource(Message, "/api/rooms/<int:a_room>/<int:user_id>/messages")
 
 # Press the green button in the gutter to run the script.

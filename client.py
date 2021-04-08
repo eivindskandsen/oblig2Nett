@@ -18,5 +18,8 @@ print(response.json())
 response = requests.get('http://127.0.0.1:5000/' + "/api/user/2")
 print(response.json())
 
-response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/messages", {"chat": "Hallo"})
+response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/1/messages", {"chat": "Hallo", "user_id" : 1, "room": 0})
+print(response.json())
+
+response =requests.get('http://127.0.0.1:5000/' + "/api/rooms/0/1/message")
 print(response.json())
