@@ -45,7 +45,7 @@ class Rooms(Resource):
         args = chat_room_add.parse_args()
         #chat_room[a_room] = args
         chat_rooms.append(args)
-        print(chat_rooms)
+        #print(chat_rooms)
         return chat_rooms[a_room], 201
 
 
@@ -72,24 +72,29 @@ class Messages(Resource):
 class Messager(Resource):
 
     def get(self, a_room, user_id):
-        abort_if_not_found(user_id, users)
-        abort_if_not_found(a_room, chat_rooms)
+        #abort_if_not_found(user_id, users)
+        #abort_if_not_found(a_room, chat_rooms)
 
 
-        print=[]
+        print_array=[]
 
-        #for x in chat:
-         #   if not x.get("user_id")==user_id:
+        for x in chat:
+            if x.get("user_id")==user_id:
+                roomnumber=x.get("room_id")
+                for y in chat:
+                    if y.get("room_id")== roomnumber:
+                        if y not in print_array:
+                            print_array.append(y)
 
-
-        return
+        print(print_array)
+        return print_array
 
     def post(self, a_room, user_id):
 
 
         args = messages_add.parse_args()
         chat.append(args)
-        print(chat)
+        #print(chat)
         return chat[len(chat) - 1]
 
 

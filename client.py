@@ -82,10 +82,13 @@ def start():
 
 ### Messages
 
-    response=requests.post('http://127.0.0.1:5000/' +"/api/rooms/0/0/messager", {"chat": "halo", "user_id":0, "room_id": 0})
+    response=requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/0/messager", {"chat": "halo", "user_id":0, "room_id": 0})
     print(response.json())
 
-    response=requests.post('http://127.0.0.1:5000/' +"/api/rooms/0/0/messager", {"chat": "halo", "user_id":0, "room_id": 1})
+    response=requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/0/messager", {"chat": "halo", "user_id":0, "room_id": 1})
+    print(response.json())
+
+    response=requests.get('http://127.0.0.1:5000/' + "/api/rooms/0/0/messager")
     print(response.json())
 
 if __name__ == '__main__':
