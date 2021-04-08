@@ -62,14 +62,21 @@ class Messages(Resource):
     def get(self, a_room, user_id):
         printer=[]
         for x in chat:
-            if x.get("user_id")== user_id:
-                if x.get("room") == a_room:
-                    printer.append(x)
-        return printer
+            if x.get("room_id") == a_room:
+                printer.append(x)
+
+        for y in printer:
+            if y.get("user_id")== user_id:
+                return printer
+
+        return "Not found in room"
+
 
 
 
 class Messager(Resource):
+
+# Getting all messages from every room ur in
 
     def get(self, a_room, user_id):
         #abort_if_not_found(user_id, users)
@@ -79,14 +86,14 @@ class Messager(Resource):
         print_array=[]
 
         for x in chat:
-            if x.get("user_id")==user_id:
+            if x.get("user_id") == user_id:
                 roomnumber=x.get("room_id")
                 for y in chat:
-                    if y.get("room_id")== roomnumber:
+                    if y.get("room_id") == roomnumber:
                         if y not in print_array:
                             print_array.append(y)
 
-        print(print_array)
+        #print(print_array)
         return print_array
 
     def post(self, a_room, user_id):

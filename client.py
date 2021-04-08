@@ -88,8 +88,18 @@ def start():
     response=requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/0/messager", {"chat": "halo", "user_id":0, "room_id": 1})
     print(response.json())
 
+# Finds all messsages in all rooms ur in
     response=requests.get('http://127.0.0.1:5000/' + "/api/rooms/0/0/messager")
     print(response.json())
+
+    response=requests.get('http://127.0.0.1:5000/' + "/api/rooms/0/0/messages")
+    print(response.json())
+
+    response=requests.get('http://127.0.0.1:5000/' + "/api/rooms/1/0/messages")
+    print(response.json())
+
+## ok
+
 
 if __name__ == '__main__':
     start()
