@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse, abort
+from tkinter import *
 
 
 app = Flask(__name__)
@@ -43,11 +44,12 @@ class Rooms(Resource):
 
 
         args = chat_room_add.parse_args()
+        if a_room == args.get("room_id"):
         #chat_room[a_room] = args
-        chat_rooms.append(args)
+            chat_rooms.append(args)
         #print(chat_rooms)
-        return chat_rooms[a_room], 201
-
+            return chat_rooms[a_room], 201
+        return "Not excecuted"
 
 class Room(Resource):
 
@@ -168,8 +170,25 @@ api.add_resource(Messages, "/api/rooms/<int:a_room>/<int:user_id>/messages")
 api.add_resource(Messager, "/api/rooms/<int:a_room>/<int:user_id>/messager")
 api.add_resource(RoomUser, "/api/rooms/<int:a_room>/users")
 
+
+
+def gui():
+    root=Tk()
+
+    topFrame =Frame(root)
+    topFrame.pack()
+    bottomFrame=Frame()
+    bottomFrame.pack(side=BOTTOM)
+
+    root.mainloop()
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     app.run(debug=True)
+    gui()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+
+
