@@ -2,21 +2,17 @@ from flask import Flask
 from flask_restful import Api, Resource, reqparse, abort
 from tkinter import *
 
-
 app = Flask(__name__)
 api = Api(app)
 # TEST AV MEG
-chat_rooms = []
+chat_rooms = [{"room_id": 0}, {"room_id": 1}, {"room_id": 2}]
 chat_room = {}
 chat_room_users_array = []
 chat = []
 users = {}
-user_nr = 0
 # test2
 chat_room_add = reqparse.RequestParser()
 chat_room_add.add_argument("room_id", type=int, help="id is required..", required=True)
-#chat_room_add.add_argument("user", type=int, help="dict is required", required=True)
-#chat_room_add.add_argument("members", type=str, help="member array is required", required=True)
 
 chat_room_users = reqparse.RequestParser()
 chat_room_users.add_argument("room_id", type=int, help="room_id is required..", required=True)
@@ -31,6 +27,7 @@ messages_add.add_argument("chat", type=str, help="chat is required..", required=
 messages_add.add_argument("user_id", type=int, help="user_id is required..", required=True)
 messages_add.add_argument("room_id", type=int, help="room is required..", required=True)
 
+
 class Rooms(Resource):
 
     def get(self, a_room):
@@ -40,16 +37,15 @@ class Rooms(Resource):
     #   return chat_rooms[chat_room_id - 1]
 
     def post(self, a_room):
-        abort_if_exists(a_room, chat_rooms)
-
-
         args = chat_room_add.parse_args()
-        if a_room == args.get("room_id"):
-        #chat_room[a_room] = args
-            chat_rooms.append(args)
-        #print(chat_rooms)
-            return chat_rooms[a_room], 201
-        return "Not excecuted"
+        for i in chat_rooms:
+            if i.get("room_id") == args.get("room_id"):
+                abort(403, message="Room id already exists")
+        # chat_room[a_room] = args
+        chat_rooms.append(args)
+        # print(chat_rooms)
+        return chat_rooms[a_room], 201
+
 
 class Room(Resource):
 
@@ -57,69 +53,63 @@ class Room(Resource):
         return chat_rooms[a_room]
 
 
-
-
 class Messages(Resource):
 
     def get(self, a_room, user_id):
-        printer=[]
+        printer = []
         for x in chat:
             if x.get("room_id") == a_room:
                 printer.append(x)
 
         for y in printer:
-            if y.get("user_id")== user_id:
+            if y.get("user_id") == user_id:
                 return printer
 
         return "Not found in room"
 
 
-
-
 class Messager(Resource):
 
-# Getting all messages from every room ur in
+    # Getting all messages from every room ur in
 
     def get(self, a_room, user_id):
-        #abort_if_not_found(user_id, users)
-        #abort_if_not_found(a_room, chat_rooms)
+        # abort_if_not_found(user_id, users)
+        # abort_if_not_found(a_room, chat_rooms)
 
-
-        print_array=[]
+        print_array = []
 
         for x in chat:
             if x.get("user_id") == user_id:
-                roomnumber=x.get("room_id")
+                roomnumber = x.get("room_id")
                 for y in chat:
                     if y.get("room_id") == roomnumber:
                         if y not in print_array:
                             print_array.append(y)
 
-        #print(print_array)
+        # print(print_array)
         return print_array
 
     def post(self, a_room, user_id):
 
-
         args = messages_add.parse_args()
         chat.append(args)
-        #print(chat)
+        # print(chat)
         return chat[len(chat) - 1]
 
 
 class RoomUser(Resource):
     def get(self, a_room):
-       return chat_room_users_array
+        return chat_room_users_array
 
     def post(self, a_room):
-
         args = chat_room_users.parse_args()
-        #chat_room[a_room]=args
+        # chat_room[a_room]=args
         abort_if_exists(args, chat_room_users_array)
 
         chat_room_users_array.append(args)
 
-        return chat_room_users_array[len(chat_room_users_array)-1]
+        return chat_room_users_array[len(chat_room_users_array) - 1]
+
 
 class Users(Resource):
     def get(self):
@@ -149,17 +139,20 @@ class User(Resource):
         return "", 202
 
 
-
-
-
-def abort_if_not_found(id, para):
-    if id not in para:
+def abort_if_not_found(iden, para):
+    if iden not in para:
         abort(404, message="Not found")
 
 
-def abort_if_exists(id, para):
-    if id in para:
+def abort_if_exists(iden, para):
+    if iden in para:
         abort(403, message="Already exists")
+
+
+def abort_if_room_exists(iden, para):
+    for user in para:
+        if iden in para[user]:
+            abort(403, message="Chatroom already exists")
 
 
 api.add_resource(Rooms, "/api/rooms/<int:a_room>")
