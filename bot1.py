@@ -12,10 +12,15 @@ def post_room(room):
     print(response.json())
 
 
-def post_message(chat, user_id, room_id):
+#def post_message(chat, user_id, room_id):
 
 
-def get_all_messages(room_id, user_id):
+#def get_all_messages(room_id, user_id):
 
 
-def get_all_messages_room(room_id, user_id):
+#def get_all_messages_room(room_id, user_id):
+
+
+if __name__ == '__main__':
+    post_user(input("Write your name"))
+    post_room(input("Which room do you want to create? (Number)"))
