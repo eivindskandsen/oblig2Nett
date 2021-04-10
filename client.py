@@ -90,7 +90,7 @@ class post_room:
     navn="Make room"
     def method(self):
         room=input("Write room number: ")
-        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/0", {"room_id": room})
+        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/"+room, {"room_id": room})
         print(response.json())
 
 class post_message:
