@@ -5,7 +5,7 @@ from tkinter import *
 app = Flask(__name__)
 api = Api(app)
 # TEST AV MEG
-chat_rooms = [{"room_id": 0}, {"room_id": 1}, {"room_id": 2}]
+chat_rooms = []
 chat_room = {}
 chat_room_users_array = []
 chat = []
@@ -37,19 +37,24 @@ class Rooms(Resource):
     #   return chat_rooms[chat_room_id - 1]
 
     def post(self, a_room):
+
         args = chat_room_add.parse_args()
-        for i in chat_rooms:
-            if i.get("room_id") == args.get("room_id"):
-                abort(403, message="Room id already exists")
-        # chat_room[a_room] = args
+
+        if a_room != args.get("room_id"):
+            return "Not excecuted"
+        abort_if_exists(a_room, chat_rooms)
+
         chat_rooms.append(args)
-        # print(chat_rooms)
+
+        print(chat_rooms)
         return chat_rooms[a_room], 201
+
 
 
 class Room(Resource):
 
     def get(self, a_room):
+        print(chat_rooms)
         return chat_rooms[a_room]
 
 
@@ -149,10 +154,7 @@ def abort_if_exists(iden, para):
         abort(403, message="Already exists")
 
 
-def abort_if_room_exists(iden, para):
-    for user in para:
-        if iden in para[user]:
-            abort(403, message="Chatroom already exists")
+
 
 
 api.add_resource(Rooms, "/api/rooms/<int:a_room>")

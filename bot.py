@@ -4,7 +4,7 @@ import requests
 
 def post_user(name):
     response = requests.post('http://127.0.0.1:5000/' + "/api/users", {"name": name})
-    print(response.json)
+    print(response.json())
     #print(response.json())
 
 def post_room(room):
@@ -40,4 +40,8 @@ def get_all_messages_room(room_id, user_id):
 
 if __name__ == '__main__':
 
-    post_room("Eple")
+    post_user("Eivind")
+
+    an_array=[]
+
+
