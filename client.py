@@ -104,7 +104,7 @@ class post_message:
                              {"chat": chat, "user_id": user_id, "room_id": room_id})
         print(response.json())
 
-class get_all_messages_rooms:
+class get_all_messages_room:
     index=3
     navn="Get all messages in a single room"
     def method(self):
@@ -113,7 +113,7 @@ class get_all_messages_rooms:
         response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/"+room_id+"/"+user_id+"/messages")
         print(response.json())
 
-class get_all_messages_room:
+class get_all_messages_rooms:
     index=4
     navn="Get all messages in all the rooms ur in"
     def method(self):
@@ -142,7 +142,13 @@ class get_all_users_room:
         print(response.json())
 
 
+#class get_room:
 
+#class get_rooms:
+
+#class delete_user:
+
+#class get_users:
 
 
 if __name__ == '__main__':
@@ -155,8 +161,8 @@ if __name__ == '__main__':
     a = post_user()
     b= post_room()
     c=post_message()
-    d=get_all_messages_rooms()
-    e=get_all_messages_room()
+    d=get_all_messages_room()
+    e=get_all_messages_rooms()
     f=post_user_room()
     g=get_all_users_room()
 

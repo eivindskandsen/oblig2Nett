@@ -82,8 +82,11 @@ class Messager(Resource):
     def get(self, a_room, user_id):
         # abort_if_not_found(user_id, users)
         # abort_if_not_found(a_room, chat_rooms)
-
+        boolean=False
         print_array = []
+
+        if not users[user_id]:
+            return "Not an aprooved user_id"
 
         for x in chat:
             if x.get("user_id") == user_id:
@@ -169,21 +172,13 @@ api.add_resource(RoomUser, "/api/rooms/<int:a_room>/users")
 
 
 
-def gui():
-    root=Tk()
 
-    topFrame =Frame(root)
-    topFrame.pack()
-    bottomFrame=Frame()
-    bottomFrame.pack(side=BOTTOM)
-
-    root.mainloop()
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     app.run(debug=True)
-    gui()
+
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
 
