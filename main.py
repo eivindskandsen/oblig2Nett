@@ -4,13 +4,15 @@ from tkinter import *
 
 app = Flask(__name__)
 api = Api(app)
-# TEST AV MEG
+
 chat_rooms = []
 chat_room = {}
 chat_room_users_array = []
 chat = []
 users = {}
-# test2
+
+
+
 chat_room_add = reqparse.RequestParser()
 chat_room_add.add_argument("room_id", type=int, help="id is required..", required=True)
 
@@ -42,7 +44,7 @@ class Rooms(Resource):
 
         if a_room != args.get("room_id"):
             return "Not excecuted"
-        abort_if_exists(a_room, chat_rooms)
+        abort_if_exists(args, chat_rooms)
 
         chat_rooms.append(args)
 
@@ -113,7 +115,7 @@ class RoomUser(Resource):
 
         chat_room_users_array.append(args)
 
-        return chat_room_users_array[len(chat_room_users_array) - 1]
+        return args #chat_room_users_array[len(chat_room_users_array) - 1]
 
 
 class Users(Resource):
