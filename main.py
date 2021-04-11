@@ -80,13 +80,12 @@ class Messager(Resource):
     # Getting all messages from every room ur in
 
     def get(self, a_room, user_id):
-        # abort_if_not_found(user_id, users)
+        abort_if_not_found(user_id, users)
         # abort_if_not_found(a_room, chat_rooms)
         boolean=False
         print_array = []
 
-        if not users[user_id]:
-            return "Not an aprooved user_id"
+
 
         for x in chat:
             if x.get("user_id") == user_id:
@@ -146,7 +145,7 @@ class User(Resource):
     def delete(self, user_id):
         abort_if_not_found(user_id, users)
         del users[user_id]
-        return "", 202
+        return "User deleted", 202
 
 
 def abort_if_not_found(iden, para):

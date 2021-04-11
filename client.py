@@ -142,13 +142,36 @@ class get_all_users_room:
         print(response.json())
 
 
-#class get_room:
+class get_room:
+    index=7
+    navn="Get one room"
+    def method(self):
+        room_id=input("The room id: ")
+        response = requests.get('http://127.0.0.1:5000/'  +"/api/room/"+room_id)
+        print(response.json())
 
-#class get_rooms:
 
-#class delete_user:
+class get_rooms:
+    index=8
+    navn="Get all rooms"
+    def method(self):
+        response = requests.get('http://127.0.0.1:5000/' + "/api/room/0" )
+        print(response.json())
 
-#class get_users:
+class delete_user:
+    index=9
+    navn="Delete user"
+    def method(self):
+        user_id=input("User id: ")
+        response = requests.delete('http://127.0.0.1:5000/' + "/api/user/"+user_id)
+        print(response.json())
+
+class get_users:
+    index=10
+    navn="Get all users"
+    def method(self):
+        response = requests.get('http://127.0.0.1:5000/' + "/api/users")
+        print(response.json())
 
 
 if __name__ == '__main__':
@@ -165,6 +188,10 @@ if __name__ == '__main__':
     e=get_all_messages_rooms()
     f=post_user_room()
     g=get_all_users_room()
+    h=get_room()
+    i=get_rooms()
+    j=delete_user()
+    k=get_users()
 
 
     an_array.append(a)
@@ -174,6 +201,10 @@ if __name__ == '__main__':
     an_array.append(e)
     an_array.append(f)
     an_array.append(g)
+    an_array.append(h)
+    an_array.append(i)
+    an_array.append(j)
+    an_array.append(k)
 
     while True:
 
@@ -184,6 +215,7 @@ if __name__ == '__main__':
         inputten = input("What do u want to do, write a number from indexes: ")
         if inputten=="Exit":
             break
+
         int_inputten=int(inputten)
 
 
