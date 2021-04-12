@@ -1,6 +1,6 @@
 import requests
 
-userid=-1
+user=-1
 def start():
 
 
@@ -85,8 +85,9 @@ class post_user:
     def method(self):
         name=input("Write Name: ")
         response = requests.post('http://127.0.0.1:5000/' + "/api/users", {"name": name})
-        userid=response.json()
-        print(userid)
+        global user
+        user=response.json()
+        print(user)
         print(response.json())
 
 class post_room:
@@ -181,7 +182,7 @@ class get_user:
     index=11
     navn="Get your userID"
     def method(self):
-        print(userid)
+        print(user)
 
 
 if __name__ == '__main__':
