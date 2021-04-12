@@ -4,6 +4,7 @@ userid=-1
 def start():
 
 
+
     ##TESTING##
 
 ## rooms
@@ -76,7 +77,7 @@ def start():
     print(response.json())
 
 ## ok
-
+    response = requests.get('http://127.0.0.1:5000/' + "/api/uses/Eple")
 
 class post_user:
     index=0
@@ -176,6 +177,12 @@ class get_users:
         response = requests.get('http://127.0.0.1:5000/' + "/api/users")
         print(response.json())
 
+class get_user:
+    index=11
+    navn="Get your userID"
+    def method(self):
+        print(userid)
+
 
 if __name__ == '__main__':
     start()
@@ -195,6 +202,7 @@ if __name__ == '__main__':
     i=get_rooms()
     j=delete_user()
     k=get_users()
+    l=get_user()
 
 
     an_array.append(a)
@@ -208,6 +216,7 @@ if __name__ == '__main__':
     an_array.append(i)
     an_array.append(j)
     an_array.append(k)
+    an_array.append(l)
 
     while True:
 

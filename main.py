@@ -11,8 +11,6 @@ chat_room_users_array = []
 chat = []
 users = {}
 
-
-
 chat_room_add = reqparse.RequestParser()
 chat_room_add.add_argument("room_id", type=int, help="id is required..", required=True)
 
@@ -22,7 +20,6 @@ chat_room_users.add_argument("user", type=int, help="user_id is required", requi
 
 user_post = reqparse.RequestParser()
 user_post.add_argument("name", type=str, help="Name is required!", required=True)
-# user_post.add_argument("ip", type=int, help="Ip is required!", required=True)
 
 messages_add = reqparse.RequestParser()
 messages_add.add_argument("chat", type=str, help="chat is required..", required=True)
@@ -40,7 +37,6 @@ class Rooms(Resource):
     #   return chat_rooms[chat_room_id - 1]
 
     def post(self, a_room):
-
         args = chat_room_add.parse_args()
 
         if a_room != args.get("room_id"):
@@ -51,7 +47,6 @@ class Rooms(Resource):
 
         print(chat_rooms)
         return chat_rooms[a_room], 201
-
 
 
 class Room(Resource):
@@ -86,8 +81,6 @@ class Messager(Resource):
         boolean=False
         print_array = []
 
-
-
         for x in chat:
             if x.get("user_id") == user_id:
                 roomnumber = x.get("room_id")
@@ -118,7 +111,7 @@ class RoomUser(Resource):
 
         chat_room_users_array.append(args)
 
-        return args #chat_room_users_array[len(chat_room_users_array) - 1]
+        return args  # chat_room_users_array[len(chat_room_users_array) - 1]
 
 
 class Users(Resource):
@@ -159,9 +152,6 @@ def abort_if_exists(iden, para):
         abort(403, message="Already exists")
 
 
-
-
-
 api.add_resource(Rooms, "/api/rooms/<int:a_room>")
 api.add_resource(Room, "/api/room/<int:a_room>")
 api.add_resource(User, "/api/user/<int:user_id>")
@@ -170,17 +160,8 @@ api.add_resource(Messages, "/api/rooms/<int:a_room>/<int:user_id>/messages")
 api.add_resource(Messager, "/api/rooms/<int:a_room>/<int:user_id>/messager")
 api.add_resource(RoomUser, "/api/rooms/<int:a_room>/users")
 
-
-
-
-
-
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     app.run(debug=True)
 
-
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
-
-
-

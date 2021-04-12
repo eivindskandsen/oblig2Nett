@@ -24,6 +24,7 @@ def get_all_messages(room_id, user_id):
 
 
 if __name__ == '__main__':
+
     post_user("Ulf")
     post_room(4)
     post_message("Hei, alle sammen", user_id, 4)
