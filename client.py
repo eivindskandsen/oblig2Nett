@@ -1,5 +1,6 @@
 import requests
 
+userid=-1
 def start():
 
 
@@ -34,7 +35,7 @@ def start():
     response=requests.get('http://127.0.0.1:5000/' +"/api/user/0")
     print(response.json())
 
-    response=requests.delete('http://127.0.0.1:5000/' +"/api/user/0")
+    response=requests.delete('http://127.0.0.1:5000/' +"/api/user/1")
     print(response.json())
 
     response=requests.get('http://127.0.0.1:5000/' +"/api/user/1")
@@ -83,6 +84,8 @@ class post_user:
     def method(self):
         name=input("Write Name: ")
         response = requests.post('http://127.0.0.1:5000/' + "/api/users", {"name": name})
+        userid=response.json()
+        print(userid)
         print(response.json())
 
 class post_room:
@@ -155,7 +158,7 @@ class get_rooms:
     index=8
     navn="Get all rooms"
     def method(self):
-        response = requests.get('http://127.0.0.1:5000/' + "/api/room/0" )
+        response = requests.get('http://127.0.0.1:5000/' +"/api/rooms/0")
         print(response.json())
 
 class delete_user:

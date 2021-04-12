@@ -33,6 +33,7 @@ messages_add.add_argument("room_id", type=int, help="room is required..", requir
 class Rooms(Resource):
 
     def get(self, a_room):
+
         return chat_rooms
 
     # def get_one_room(self, chat_room_id):
@@ -81,7 +82,7 @@ class Messager(Resource):
 
     def get(self, a_room, user_id):
         abort_if_not_found(user_id, users)
-        # abort_if_not_found(a_room, chat_rooms)
+        abort_if_not_found(chat_rooms[a_room], chat_rooms)
         boolean=False
         print_array = []
 
@@ -103,7 +104,7 @@ class Messager(Resource):
         args = messages_add.parse_args()
         chat.append(args)
         # print(chat)
-        return chat[len(chat) - 1]
+        return args
 
 
 class RoomUser(Resource):
