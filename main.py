@@ -98,7 +98,7 @@ class Messager(Resource):
                         if y not in print_array:
                             print_array.append(y)
 
-        # print(print_array)
+        print(print_array)
         return print_array
 
     def post(self, a_room, user_id):
@@ -107,7 +107,7 @@ class Messager(Resource):
         #if args.get("room_id") not in range(0, len(chat_rooms)):
         #    return "Room not found"
 
-        abort_if_not_found(args, chat_rooms)
+        #abort_if_not_found(args, chat_rooms)
         #print (chat_room_users_array[0])
         #print(args.get("room_id"))
        # if {args.get("room_id"), args.get("user")} not in chat_room_users_array:
@@ -123,7 +123,13 @@ class Messager(Resource):
 
 class RoomUser(Resource):
     def get(self, a_room):
-        return chat_room_users_array
+        return_array=[]
+        boolean=False
+        for x in chat_room_users_array:
+
+            if x.get("room_id") == a_room:
+                return_array.append(x)
+        return return_array
 
     def post(self, a_room):
         args = chat_room_users.parse_args()

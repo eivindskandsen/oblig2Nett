@@ -60,8 +60,8 @@ class post_user_room:
     index = 5
     navn = "User joins a room"
 
-    def method(self):
-        room_id = input("The room id: ")
+    def method(self, room_id):
+        #room_id = input("The room id: ")
         user_id = user
         response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/" + room_id + "/users",
                                  {"room_id": room_id, "user": user_id})
@@ -154,9 +154,12 @@ if __name__ == '__main__':
     an_array.append(l)
 
     an_array[0].method("Elise")
+    an_array[5].method("0")
+    #an_array[1].method(0)
+    an_array[1].method("2")
 
-    an_array[1].method(0)
-    an_array[1].method(1)
+    #an_array[5].method("0")
+    an_array[5].method("1")
 
     an_array[2].method("Hello, I'm Elise", 0)
     an_array[2].method("I just write stuff because I can", 0)
@@ -164,8 +167,8 @@ if __name__ == '__main__':
     an_array[2].method("MOHAHAHAHAHAHA", 0)
 
     an_array[2].method("Hello, I'm Elise", 1)
-    an_array[2].method("I just write stuff because I can", 1)
-    an_array[2].method("And no one can stop me", 1)
+    an_array[2].method("I just write stuff because I can in room 1", 1)
+    an_array[2].method("And no one can stop me lol", 1)
     an_array[2].method("MOHAHAHAHAHAHA", 1)
 
     an_array[3].method(0)

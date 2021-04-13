@@ -113,7 +113,7 @@ class post_message:
         #user_id=input("Your user id: ")
         room_id=input("Your room number to post in: ")
         global user
-        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/"+user+"/messager",
+        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/"+str(user)+"/messager",
                              {"chat": chat, "user_id": user, "room_id": room_id})
         print(response.json())
 
