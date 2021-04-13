@@ -3,54 +3,53 @@ import requests
 user=str(666)
 
 class post_user:
-    index=0
-    navn="Make user"
-    def method(self):
-        name=input("Write Name: ")
+    index = 0
+    navn = "Make user"
+
+    def method(self, name):
         response = requests.post('http://127.0.0.1:5000/' + "/api/users", {"name": name})
         global user
-        user=response.json()
-        print(user)
+        user = response.json()
         print(response.json())
+
 
 class post_room:
-    index=1
-    navn="Make room"
-    def method(self):
-        room=input("Write room number: ")
-        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/"+room, {"room_id": room})
+    index = 1
+    navn = "Make room"
+
+    def method(self, room):
+        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/{}".format(room), {"room_id": room})
         print(response.json())
+        #rooms.append(response.json())
 
 class post_message:
-    index=2
-    navn="Post Message in room"
-    def method(self):
-        chat=input("Whats the message: ")
-        #user_id=input("Your user id: ")
-        room_id=input("Your room number to post in: ")
-        global user
-        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/"+user+"/messager",
-                             {"chat": chat, "user_id": user, "room_id": room_id})
+    index = 2
+    navn = "Post Message in room"
+
+    def method(self,chat,room_id):
+        user_id = user
+        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/0/messager",
+                                 {"chat": chat, "user_id": user_id, "room_id": room_id})
         print(response.json())
 
 class get_all_messages_room:
     index=3
     navn="Get all messages in a single room"
-    def method(self):
-        room_id=input("Room id: ")
+    def method(self, room_id):
+        #room_id=input("Room id: ")
         global user
         #user_id=input("User id: ")
-        response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/"+room_id+"/"+user+"/messages")
+        response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/{}/{}/messages".format(room_id, user))
         print(response.json())
 
 class get_all_messages_rooms:
     index=4
     navn="Get all messages in all the rooms ur in"
-    def method(self):
-        room_id=input("The room id: ")
+    def method(self,room_id):
+        #room_id=input("The room id: ")
         #user_id=input("The user id: ")
         global user
-        response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/"+room_id+"/"+user+"/messager")
+        response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/{}/{}/messager".format(room_id, user))
         print(response.json())
 
 
@@ -147,22 +146,21 @@ if __name__ == '__main__':
     an_array.append(l)
 
 
-    
 
-    while True:
-
-        for x in an_array:
-            print("Index: "+str(x.index)+", "+x.navn)
+    an_array[0].method("Tobias")
 
 
-        inputten = input("What do u want to do, write a number from indexes: ")
-        if inputten=="Exit":
-            break
+    an_array[1].method(0)
 
-        int_inputten=int(inputten)
+    an_array[2].method("Hello, I'm Tobias", 0)
+    an_array[2].method("I like waffles", 0)
+    an_array[2].method("And no one can stop me from eating it", 0)
+    an_array[2].method("MOHAHAHAHAHAHA, im an adult", 0)
 
+    an_array[2].method("Hello, I'm Tobias", 1)
+    an_array[2].method("I like football", 1)
+    an_array[2].method("The proper one", 1)
+    an_array[2].method("Which do u think im thinking of", 1)
 
-
-        an_array[int_inputten].method()
-
-        print("---")
+    an_array[3].method(0)
+    an_array[4].method(1)
