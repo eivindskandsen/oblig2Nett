@@ -45,7 +45,6 @@ class Rooms(Resource):
 
         chat_rooms.append(args)
 
-        print(chat_rooms)
         return chat_rooms[a_room], 201
 
 
