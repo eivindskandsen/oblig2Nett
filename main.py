@@ -1,6 +1,14 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse, abort
-from tkinter import *
+import socket
+
+
+#serverSocket= socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#serverSocket.bind('0.0.0.0', 2345)
+#serverSocket.listen(2)
+
+
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -45,7 +53,7 @@ class Rooms(Resource):
 
         chat_rooms.append(args)
 
-        return chat_rooms[a_room], 201
+        return args, 201
 
 
 class Room(Resource):
@@ -76,7 +84,7 @@ class Messager(Resource):
 
     def get(self, a_room, user_id):
         abort_if_not_found(user_id, users)
-        #abort_if_not_found(chat_rooms[a_room], chat_rooms)
+        abort_if_not_found(chat_rooms[a_room], chat_rooms)
         if a_room not in range (0, len(chat_rooms)):
             return "Room not found"
         #boolean=False
@@ -96,14 +104,22 @@ class Messager(Resource):
     def post(self, a_room, user_id):
         args = messages_add.parse_args()
 
-        if args.get("room_id") not in range(0, len(chat_rooms)):
-            return "Room not found"
+        #if args.get("room_id") not in range(0, len(chat_rooms)):
+        #    return "Room not found"
 
+        abort_if_not_found(args, chat_rooms)
+        #print (chat_room_users_array[0])
+        #print(args.get("room_id"))
+       # if {args.get("room_id"), args.get("user")} not in chat_room_users_array:
+         #   return "User not in room"
+        for x in chat_room_users_array:
+            print(x.get("room_id"), x.get("user"))
+            print(args.get("room_id"), args.get("user_id"))
+            if (x.get("room_id"), x.get("user")) == (args.get("room_id"), args.get("user_id")):
+                chat.append(args)
+                return args
 
-        chat.append(args)
-
-        return args
-
+        return "User not in room"
 
 class RoomUser(Resource):
     def get(self, a_room):
@@ -113,6 +129,7 @@ class RoomUser(Resource):
         args = chat_room_users.parse_args()
         # chat_room[a_room]=args
         abort_if_exists(args, chat_room_users_array)
+        abort_if_not_found(args.get("user"), users)
 
         chat_room_users_array.append(args)
 
@@ -168,5 +185,13 @@ api.add_resource(RoomUser, "/api/rooms/<int:a_room>/users")
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     app.run(debug=True)
+
+    print("Waiting for max 1 connection..")
+
+    #while True:
+
+        #clientSocket, address= serverSocket.accept()
+        #clientSocket.send("Du er connected!")
+
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

@@ -1,6 +1,13 @@
 import requests
+import socket
 
 user=str(666)
+
+
+def socket():
+
+    return
+
 def start():
 
 
@@ -138,7 +145,7 @@ class post_user_room:
         room_id=input("The room id: ")
         #user_id=input("The user id: ")
         global user
-        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/" + room_id + "/users", {"room_id": room_id, "user": user} )
+        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/" + room_id + "/users", {"room_id": int(room_id), "user": user} )
         print(response.json())
 
 
