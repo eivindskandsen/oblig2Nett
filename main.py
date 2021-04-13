@@ -92,10 +92,14 @@ class Messager(Resource):
         return print_array
 
     def post(self, a_room, user_id):
-
         args = messages_add.parse_args()
+
+        if args.get("room_id") not in range(0, len(chat_rooms)):
+            return "Room not found"
+
+
         chat.append(args)
-        # print(chat)
+
         return args
 
 

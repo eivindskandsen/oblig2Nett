@@ -146,6 +146,9 @@ if __name__ == '__main__':
     an_array.append(k)
     an_array.append(l)
 
+
+    
+
     while True:
 
         for x in an_array:
