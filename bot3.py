@@ -1,83 +1,6 @@
 import requests
 
 user=str(666)
-def start():
-
-
-
-    ##TESTING##
-
-## rooms
-    response= requests.post('http://127.0.0.1:5000/' +"/api/rooms/0", {"room_id":0})
-    print(response.json())
-
-    response= requests.post('http://127.0.0.1:5000/' +"/api/rooms/1", {"room_id":1})
-    print(response.json())
-
-    response=requests.get('http://127.0.0.1:5000/' +"/api/rooms/0")
-    print(response.json())
-
-    response=requests.get('http://127.0.0.1:5000/' +"/api/room/0")
-    print(response.json())
-## ok
-
-## users
-    response=requests.post('http://127.0.0.1:5000/' +"/api/users", {"name": "Eple"})
-    print(response.json())
-
-    response=requests.post('http://127.0.0.1:5000/' +"/api/users", {"name": "Tomat"})
-    print(response.json())
-
-    response=requests.get('http://127.0.0.1:5000/' +"/api/users")
-    print(response.json())
-
-## OK
-
-    response=requests.get('http://127.0.0.1:5000/' +"/api/user/0")
-    print(response.json())
-
-    response=requests.delete('http://127.0.0.1:5000/' +"/api/user/1")
-    print(response.json())
-
-    response=requests.get('http://127.0.0.1:5000/' +"/api/user/1")
-    print(response.json())
-
-##ok
-
-## Room-users
-
-
-    response=requests.post('http://127.0.0.1:5000/' +"/api/rooms/0/users", {"room_id": 0, "user": 0})
-    print(response.json())
-
-    response=requests.get('http://127.0.0.1:5000/' +"/api/rooms/0/users")
-    print(response.json())
-
-## ok
-
-### Messages
-    global user
-    response=requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/"+user+"/messager", {"chat": "halo", "user_id":0, "room_id": 0})
-    print(response.json())
-
-    response=requests.post('http://127.0.0.1:5000/' + "/api/rooms/1/"+user+"/messager", {"chat": "halo", "user_id":0, "room_id": 1})
-    print(response.json())
-
-# Messager Finds all messsages in all rooms user are in
-    response=requests.get('http://127.0.0.1:5000/' + "/api/rooms/0/"+user+"/messager")
-    print(response.json())
-
-#
-
-
-    response=requests.get('http://127.0.0.1:5000/' + "/api/rooms/0/0/messages")
-    print(response.json())
-
-    response=requests.get('http://127.0.0.1:5000/' + "/api/rooms/1/0/messages")
-    print(response.json())
-
-## ok
-    response = requests.get('http://127.0.0.1:5000/' + "/api/uses/Eple")
 
 class post_user:
     index=0
@@ -190,7 +113,7 @@ class get_user:
 
 
 if __name__ == '__main__':
-    start()
+
 
     print("---")
     #inputten ="Hei"

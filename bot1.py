@@ -1,6 +1,6 @@
 import requests
 
-user_id = int
+user_id = 1
 def post_user(name):
     response = requests.post('http://127.0.0.1:5000/' + "/api/users", {"name": name})
     user_id = response.json()
