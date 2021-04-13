@@ -56,8 +56,8 @@ class get_all_messages_rooms:
 class post_user_room:
     index=5
     navn="User joins a room"
-    def method(self):
-        room_id=input("The room id: ")
+    def method(self, room_id):
+        #room_id=input("The room id: ")
         #user_id=input("The user id: ")
         global user
         response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/" + room_id + "/users", {"room_id": room_id, "user": user} )
@@ -149,8 +149,10 @@ if __name__ == '__main__':
 
     an_array[0].method("Tobias")
 
+    an_array[5].method("0")
+    an_array[1].method("5")
 
-    an_array[1].method(0)
+    an_array[5].method("1")
 
     an_array[2].method("Hello, I'm Annike", 0)
     an_array[2].method("I like potates", 0)

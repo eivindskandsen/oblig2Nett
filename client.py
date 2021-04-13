@@ -124,17 +124,17 @@ class get_all_messages_room:
         room_id=input("Room id: ")
         global user
         #user_id=input("User id: ")
-        response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/"+room_id+"/"+user+"/messages")
+        response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/{}/{}/messages".format(room_id, user))
         print(response.json())
 
 class get_all_messages_rooms:
     index=4
     navn="Get all messages in all the rooms ur in"
     def method(self):
-        room_id=input("The room id: ")
+        room_id=input("The room id of one room ur in: ")
         #user_id=input("The user id: ")
         global user
-        response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/"+room_id+"/"+user+"/messager")
+        response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/{}/{}/messager".format(room_id, user))
         print(response.json())
 
 

@@ -171,5 +171,5 @@ if __name__ == '__main__':
     an_array[2].method("And no one can stop me lol", 1)
     an_array[2].method("MOHAHAHAHAHAHA", 1)
 
-    an_array[3].method(0)
-    an_array[3].method(1)
+    an_array[3].method("0")
+    an_array[3].method("1")

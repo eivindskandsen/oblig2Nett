@@ -59,7 +59,7 @@ class Rooms(Resource):
 class Room(Resource):
 
     def get(self, a_room):
-        print(chat_rooms)
+        #print(chat_rooms)
         return chat_rooms[a_room]
 
 
@@ -67,15 +67,28 @@ class Messages(Resource):
 
     def get(self, a_room, user_id):
         printer = []
-        for x in chat:
-            if x.get("room_id") == a_room:
-                printer.append(x)
+        boolean=False
+        print(chat_room_users_array)
+        for z in chat_room_users_array:
+            print(z.get("user"))
+            print(user_id)
+            if z.get("user")==user_id:
+                boolean=True
+            #else:
+               # return "Not found in room test"
+        if boolean==True:
+            for x in chat:
+                if x.get("room_id") == a_room:
+                    printer.append(x)
 
-        for y in printer:
-            if y.get("user_id") == user_id:
-                return printer
-
-        return "Not found in room"
+            #for y in printer:
+             #   print(printer)
+              #  print(y.get("user_id"))
+               # print(user_id)
+                #if y.get("user_id") == (user_id):
+            return printer
+        if boolean==False:
+            return "Not found in room"
 
 
 class Messager(Resource):
@@ -91,14 +104,14 @@ class Messager(Resource):
         print_array = []
 
         for x in chat:
-            if x.get("user_id") == user_id:
+            if x.get('user_id') == user_id:
                 roomnumber = x.get("room_id")
                 for y in chat:
                     if y.get("room_id") == roomnumber:
                         if y not in print_array:
                             print_array.append(y)
 
-        print(print_array)
+        #print(print_array)
         return print_array
 
     def post(self, a_room, user_id):
@@ -113,8 +126,8 @@ class Messager(Resource):
        # if {args.get("room_id"), args.get("user")} not in chat_room_users_array:
          #   return "User not in room"
         for x in chat_room_users_array:
-            print(x.get("room_id"), x.get("user"))
-            print(args.get("room_id"), args.get("user_id"))
+            #print(x.get("room_id"), x.get("user"))
+            #print(args.get("room_id"), args.get("user_id"))
             if (x.get("room_id"), x.get("user")) == (args.get("room_id"), args.get("user_id")):
                 chat.append(args)
                 return args
@@ -138,6 +151,7 @@ class RoomUser(Resource):
         abort_if_not_found(args.get("user"), users)
 
         chat_room_users_array.append(args)
+        print(chat_room_users_array)
 
         return args  # chat_room_users_array[len(chat_room_users_array) - 1]
 
