@@ -1,197 +1,215 @@
 import requests
 import socket
 
-user=str(666)
+user = str(666)
 
 
 def socket():
-
     return
 
+
 def start():
-
-
-
     ##TESTING##
 
-## rooms
-    response= requests.post('http://127.0.0.1:5000/' +"/api/rooms/0", {"room_id":0})
+    ## rooms
+    response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/0", {"room_id": 0})
     print(response.json())
 
-    response= requests.post('http://127.0.0.1:5000/' +"/api/rooms/1", {"room_id":1})
+    response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/1", {"room_id": 1})
     print(response.json())
 
-    response=requests.get('http://127.0.0.1:5000/' +"/api/rooms/0")
+    response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/0")
     print(response.json())
 
-    response=requests.get('http://127.0.0.1:5000/' +"/api/room/0")
+    response = requests.get('http://127.0.0.1:5000/' + "/api/room/0")
     print(response.json())
-## ok
+    ## ok
 
-## users
-    response=requests.post('http://127.0.0.1:5000/' +"/api/users", {"name": "Eple"})
-    print(response.json())
-
-    response=requests.post('http://127.0.0.1:5000/' +"/api/users", {"name": "Tomat"})
+    ## users
+    response = requests.post('http://127.0.0.1:5000/' + "/api/users", {"name": "Eple"})
     print(response.json())
 
-    response=requests.get('http://127.0.0.1:5000/' +"/api/users")
+    response = requests.post('http://127.0.0.1:5000/' + "/api/users", {"name": "Tomat"})
     print(response.json())
 
-## OK
-
-    response=requests.get('http://127.0.0.1:5000/' +"/api/user/0")
+    response = requests.get('http://127.0.0.1:5000/' + "/api/users")
     print(response.json())
 
-    response=requests.delete('http://127.0.0.1:5000/' +"/api/user/1")
+    ## OK
+
+    response = requests.get('http://127.0.0.1:5000/' + "/api/user/0")
     print(response.json())
 
-    response=requests.get('http://127.0.0.1:5000/' +"/api/user/1")
+    response = requests.delete('http://127.0.0.1:5000/' + "/api/user/1")
     print(response.json())
 
-##ok
-
-## Room-users
-
-
-    response=requests.post('http://127.0.0.1:5000/' +"/api/rooms/0/users", {"room_id": 0, "user": 0})
+    response = requests.get('http://127.0.0.1:5000/' + "/api/user/1")
     print(response.json())
 
-    response=requests.get('http://127.0.0.1:5000/' +"/api/rooms/0/users")
+    ##ok
+
+    ## Room-users
+
+    response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/users", {"room_id": 0, "user": 0})
     print(response.json())
 
-## ok
+    response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/0/users")
+    print(response.json())
 
-### Messages
+    ## ok
+
+    ### Messages
     global user
-    response=requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/"+user+"/messager", {"chat": "halo", "user_id":0, "room_id": 0})
+    response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/" + user + "/messager",
+                             {"chat": "halo", "user_id": 0, "room_id": 0})
     print(response.json())
 
-    response=requests.post('http://127.0.0.1:5000/' + "/api/rooms/1/"+user+"/messager", {"chat": "halo", "user_id":0, "room_id": 1})
+    response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/1/" + user + "/messager",
+                             {"chat": "halo", "user_id": 0, "room_id": 1})
     print(response.json())
 
-# Messager Finds all messsages in all rooms user are in
-    response=requests.get('http://127.0.0.1:5000/' + "/api/rooms/0/"+user+"/messager")
+    # Messager Finds all messsages in all rooms user are in
+    response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/0/" + user + "/messager")
     print(response.json())
 
-#
+    #
 
-
-    response=requests.get('http://127.0.0.1:5000/' + "/api/rooms/0/0/messages")
+    response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/0/0/messages")
     print(response.json())
 
-    response=requests.get('http://127.0.0.1:5000/' + "/api/rooms/1/0/messages")
+    response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/1/0/messages")
     print(response.json())
 
-## ok
+    ## ok
     response = requests.get('http://127.0.0.1:5000/' + "/api/uses/Eple")
 
+
 class post_user:
-    index=0
-    navn="Make user"
+    index = 0
+    navn = "Make user"
+
     def method(self):
-        name=input("Write Name: ")
+        name = input("Write Name: ")
         response = requests.post('http://127.0.0.1:5000/' + "/api/users", {"name": name})
         global user
-        user=response.json()
+        user = response.json()
         print(user)
         print(response.json())
 
+
 class post_room:
-    index=1
-    navn="Make room"
+    index = 1
+    navn = "Make room"
+
     def method(self):
-        room=input("Write room number: ")
-        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/"+room, {"room_id": room})
+        room = input("Write room number: ")
+        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/" + room, {"room_id": room})
         print(response.json())
+
 
 class post_message:
-    index=2
-    navn="Post Message in room"
+    index = 2
+    navn = "Post Message in room"
+
     def method(self):
-        chat=input("Whats the message: ")
-        #user_id=input("Your user id: ")
-        room_id=input("Your room number to post in: ")
+        chat = input("Whats the message: ")
+        # user_id=input("Your user id: ")
+        room_id = input("Your room number to post in: ")
         global user
-        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/"+str(user)+"/messager",
-                             {"chat": chat, "user_id": user, "room_id": room_id})
+        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/0/" + str(user) + "/messager",
+                                 {"chat": chat, "user_id": user, "room_id": room_id})
         print(response.json())
 
+
 class get_all_messages_room:
-    index=3
-    navn="Get all messages in a single room"
+    index = 3
+    navn = "Get all messages in a single room"
+
     def method(self):
-        room_id=input("Room id: ")
+        room_id = input("Room id: ")
         global user
-        #user_id=input("User id: ")
+        # user_id=input("User id: ")
         response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/{}/{}/messages".format(room_id, user))
         print(response.json())
 
+
 class get_all_messages_rooms:
-    index=4
-    navn="Get all messages in all the rooms ur in"
+    index = 4
+    navn = "Get all messages in all the rooms ur in"
+
     def method(self):
-        room_id=input("The room id of one room ur in: ")
-        #user_id=input("The user id: ")
+        room_id = input("The room id of one room ur in: ")
+        # user_id=input("The user id: ")
         global user
         response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/{}/{}/messager".format(room_id, user))
         print(response.json())
 
 
 class post_user_room:
-    index=5
-    navn="User joins a room"
+    index = 5
+    navn = "User joins a room"
+
     def method(self):
-        room_id=input("The room id: ")
-        #user_id=input("The user id: ")
+        room_id = input("The room id: ")
+        # user_id=input("The user id: ")
         global user
-        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/" + room_id + "/users", {"room_id": int(room_id), "user": user} )
+        response = requests.post('http://127.0.0.1:5000/' + "/api/rooms/" + room_id + "/users",
+                                 {"room_id": int(room_id), "user": user})
         print(response.json())
 
 
 class get_all_users_room:
-    index=6
-    navn="Get all users in room"
+    index = 6
+    navn = "Get all users in room"
+
     def method(self):
-        room_id=input("The room id: ")
-        response = requests.get('http://127.0.0.1:5000/'  + "/api/rooms/"+room_id+"/users")
+        room_id = input("The room id: ")
+        response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/" + room_id + "/users")
         print(response.json())
 
 
 class get_room:
-    index=7
-    navn="Get one room"
+    index = 7
+    navn = "Get one room"
+
     def method(self):
-        room_id=input("The room id: ")
-        response = requests.get('http://127.0.0.1:5000/'  +"/api/room/"+room_id)
+        room_id = input("The room id: ")
+        response = requests.get('http://127.0.0.1:5000/' + "/api/room/" + room_id)
         print(response.json())
 
 
 class get_rooms:
-    index=8
-    navn="Get all rooms"
+    index = 8
+    navn = "Get all rooms"
+
     def method(self):
-        response = requests.get('http://127.0.0.1:5000/' +"/api/rooms/0")
+        response = requests.get('http://127.0.0.1:5000/' + "/api/rooms/0")
         print(response.json())
+
 
 class delete_user:
-    index=9
-    navn="Delete user"
+    index = 9
+    navn = "Delete user"
+
     def method(self):
-        user_id=input("User id: ")
-        response = requests.delete('http://127.0.0.1:5000/' + "/api/user/"+user_id)
+        user_id = input("User id: ")
+        response = requests.delete('http://127.0.0.1:5000/' + "/api/user/" + user_id)
         print(response.json())
 
+
 class get_users:
-    index=10
-    navn="Get all users"
+    index = 10
+    navn = "Get all users"
+
     def method(self):
         response = requests.get('http://127.0.0.1:5000/' + "/api/users")
         print(response.json())
 
+
 class get_user:
-    index=11
-    navn="Get your userID"
+    index = 11
+    navn = "Get your userID"
+
     def method(self):
         global user
         print(user)
@@ -201,22 +219,21 @@ if __name__ == '__main__':
     start()
 
     print("---")
-
-    an_array=[]
+    # inputten ="Hei"
+    an_array = []
 
     a = post_user()
-    b= post_room()
-    c=post_message()
-    d=get_all_messages_room()
-    e=get_all_messages_rooms()
-    f=post_user_room()
-    g=get_all_users_room()
-    h=get_room()
-    i=get_rooms()
-    j=delete_user()
-    k=get_users()
-    l=get_user()
-
+    b = post_room()
+    c = post_message()
+    d = get_all_messages_room()
+    e = get_all_messages_rooms()
+    f = post_user_room()
+    g = get_all_users_room()
+    h = get_room()
+    i = get_rooms()
+    j = delete_user()
+    k = get_users()
+    l = get_user()
 
     an_array.append(a)
     an_array.append(b)
@@ -234,26 +251,16 @@ if __name__ == '__main__':
     while True:
 
         for x in an_array:
-            print("Index: "+str(x.index)+", "+x.navn)
+            print("Index: " + str(x.index) + ", " + x.navn)
 
-        inputten = input("What do u want to do, write a number from indexes: ")
+        inputten = int(input("What do u want to do, write a number from indexes: "))
 
-        #while inputten not in an_array:
-          # inputten = input("What do u want to do, write a number from indexes: ")
-        if inputten == "Exit":
-            exit()
-        if inputten == "":
-            an_array[11].method()
+        while inputten >= 11 <= 0:
+            inputten = input("What do u want to do, write a number from indexes: ")
 
-        if int(inputten) not in (0, len(an_array)-1):
-            an_array[11].method()
+            if inputten == "Exit":
+                exit()
 
-
-
-        int_inputten=int(inputten)
-
-
-
-        an_array[int_inputten].method()
+        an_array[inputten].method()
 
         print("---")
