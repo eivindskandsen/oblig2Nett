@@ -98,17 +98,19 @@ class Messager(Resource):
     def get(self, a_room, user_id):
         abort_if_not_found(user_id, users)
         abort_if_not_found(chat_rooms[a_room], chat_rooms)
-        if a_room not in range (0, len(chat_rooms)):
-            return "Room not found"
+        #if a_room not in range (0, len(chat_rooms)):
+         #   return "Room not found"
         #boolean=False
         print_array = []
 
         for x in chat:
             if x.get('user_id') == user_id:
                 roomnumber = x.get("room_id")
+
                 for y in chat:
                     if y.get("room_id") == roomnumber:
                         if y not in print_array:
+
                             print_array.append(y)
 
         #print(print_array)
