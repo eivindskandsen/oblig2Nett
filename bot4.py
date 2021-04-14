@@ -1,4 +1,5 @@
 import requests
+import time
 
 user=str(666)
 
@@ -167,3 +168,4 @@ if __name__ == '__main__':
     an_array[3].method(0)
     an_array[4].method(1)
 
+    time.sleep(10)

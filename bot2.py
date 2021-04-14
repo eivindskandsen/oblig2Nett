@@ -1,4 +1,5 @@
 import requests
+import time
 
 user = -1
 rooms = []
@@ -172,3 +173,5 @@ if __name__ == '__main__':
 
     an_array[3].method(0)
     an_array[3].method(1)
+
+    time.sleep(10)
