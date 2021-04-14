@@ -236,10 +236,12 @@ if __name__ == '__main__':
         for x in an_array:
             print("Index: "+str(x.index)+", "+x.navn)
 
-
         inputten = input("What do u want to do, write a number from indexes: ")
-        if inputten=="Exit":
-            break
+
+        while inputten not in an_array:
+            inputten = input("What do u want to do, write a number from indexes: ")
+            if inputten == "Exit":
+                exit()
 
         int_inputten=int(inputten)
 
