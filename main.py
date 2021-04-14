@@ -59,7 +59,7 @@ class Rooms(Resource):
 class Room(Resource):
 
     def get(self, a_room):
-        #print(chat_rooms)
+
         return chat_rooms[a_room]
 
 
@@ -68,10 +68,10 @@ class Messages(Resource):
     def get(self, a_room, user_id):
         printer = []
         boolean=False
-        print(chat_room_users_array)
+
         for z in chat_room_users_array:
-            print(z.get("user"))
-            print(user_id)
+
+
             if z.get("user")==user_id:
                 boolean=True
             #else:
@@ -155,7 +155,7 @@ class RoomUser(Resource):
         abort_if_not_found(args.get("user"), users)
 
         chat_room_users_array.append(args)
-        print(chat_room_users_array)
+
 
         return args  # chat_room_users_array[len(chat_room_users_array) - 1]
 
