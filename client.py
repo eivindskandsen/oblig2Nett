@@ -253,14 +253,15 @@ if __name__ == '__main__':
         for x in an_array:
             print("Index: " + str(x.index) + ", " + x.navn)
 
-        inputten = int(input("What do u want to do, write a number from indexes: "))
+        inputten = input("What do u want to do, write a number from indexes: ")
 
-        while inputten >= 11 <= 0:
-            inputten = input("What do u want to do, write a number from indexes: ")
+        if inputten == "Exit":
+            exit()
 
-            if inputten == "Exit":
-                exit()
-
-        an_array[inputten].method()
+        try:
+            int_inputten = int(inputten)
+            an_array[int_inputten].method()
+        except:
+            continue
 
         print("---")
