@@ -201,7 +201,7 @@ if __name__ == '__main__':
     start()
 
     print("---")
-    #inputten ="Hei"
+
     an_array=[]
 
     a = post_user()
@@ -238,10 +238,17 @@ if __name__ == '__main__':
 
         inputten = input("What do u want to do, write a number from indexes: ")
 
-        while inputten not in an_array:
-            inputten = input("What do u want to do, write a number from indexes: ")
-            if inputten == "Exit":
-                exit()
+        #while inputten not in an_array:
+          # inputten = input("What do u want to do, write a number from indexes: ")
+        if inputten == "Exit":
+            exit()
+        if inputten == "":
+            an_array[11].method()
+
+        if int(inputten) not in (0, len(an_array)-1):
+            an_array[11].method()
+
+
 
         int_inputten=int(inputten)
 
