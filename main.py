@@ -67,7 +67,7 @@ class Room(Resource):
 
         return "room not found"
 
-    
+
 class Messages(Resource):
 
     def get(self, a_room, user_id):
@@ -79,8 +79,7 @@ class Messages(Resource):
 
             if z.get("user")==user_id:
                 boolean=True
-            #else:
-               # return "Not found in room test"
+
         if boolean==True:
             for x in chat:
                 if x.get("room_id") == a_room:
