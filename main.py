@@ -103,11 +103,13 @@ class Messager(Resource):
         #boolean=False
         print_array = []
 
-        for x in chat:
-            if x.get('user_id') == user_id:
+        for x in chat_room_users_array:
+
+            if x.get('user') == user_id:
                 roomnumber = x.get("room_id")
 
                 for y in chat:
+
                     if y.get("room_id") == roomnumber:
                         if y not in print_array:
 
