@@ -193,6 +193,7 @@ class get_user:
     index=11
     navn="Get your userID"
     def method(self):
+        global user
         print(user)
 
 
