@@ -59,10 +59,15 @@ class Rooms(Resource):
 class Room(Resource):
 
     def get(self, a_room):
+        boolean=False
 
-        return chat_rooms[a_room]
+        for x in chat_rooms:
+            if x.get("room_id")== a_room:
+                return x
 
+        return "room not found"
 
+    
 class Messages(Resource):
 
     def get(self, a_room, user_id):
@@ -96,27 +101,36 @@ class Messager(Resource):
     # Getting all messages from every room ur in
 
     def get(self, a_room, user_id):
+        boolean=False
+
         abort_if_not_found(user_id, users)
-        abort_if_not_found(chat_rooms[a_room], chat_rooms)
+        #abort_if_not_found(chat_rooms[len(chat_rooms)-1], chat_rooms)
+
+        for x in chat_rooms:
+            if x.get("room_id")== a_room:
+                boolean=True
         #if a_room not in range (0, len(chat_rooms)):
          #   return "Room not found"
         #boolean=False
         print_array = []
+        if boolean==True:
+            for x in chat_room_users_array:
 
-        for x in chat_room_users_array:
+                if x.get('user') == user_id:
+                    roomnumber = x.get("room_id")
 
-            if x.get('user') == user_id:
-                roomnumber = x.get("room_id")
+                    for y in chat:
 
-                for y in chat:
+                        if y.get("room_id") == roomnumber:
+                            if y not in print_array:
 
-                    if y.get("room_id") == roomnumber:
-                        if y not in print_array:
-
-                            print_array.append(y)
+                                print_array.append(y)
 
         #print(print_array)
-        return print_array
+            return print_array
+
+        if boolean == False:
+            return"Not completed"
 
     def post(self, a_room, user_id):
         args = messages_add.parse_args()
